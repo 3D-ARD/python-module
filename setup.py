@@ -12,11 +12,11 @@ else:
         long_description = f.read()
 
 version = {}
-with open(os.path.join(_here, '3dard', 'version.py')) as f:
+with open(os.path.join(_here, 'ThreeDARD', 'version.py')) as f:
     exec(f.read(), version)
 
 setup(
-    name='3dard',
+    name='ThreeDARD',
     version=version['__version__'],
     description=('Python module to query an fetch the 3D-ARD project.'),
     long_description=long_description,
@@ -24,7 +24,7 @@ setup(
     author_email='nmellado0@gmail.com',
     url='https://github.com/3D-ARD/python-module',
     license='MPL-2.0',
-    packages=['3dard'],
+    packages=['ThreeDARD'],
 #   no dependencies in this example
 #   install_requires=[
 #       'dependency==1.2.3',
