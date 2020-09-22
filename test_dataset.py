@@ -1,6 +1,6 @@
 from ThreeDARD import *
 
-assets = ["Crane_mesange"]
+assets = ["Maitreya_Buddha", "Dame_d_Elche", "Os", "Jonque", "Guitare_tatou", "Annexe_Haut_Carre",  "Crane_mesange"]
 
 dataset.init("./dataset")
 dataset.verbose = False
