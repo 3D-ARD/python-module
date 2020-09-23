@@ -10,6 +10,10 @@ class DatasetInitializationError(Exception):
     """Exception thrown when trying to access an uninitialized dataset"""
     pass
 
+class RemoteFileNotFountError(Exception):
+    """Exception thrown when trying to fetch a file that does not exist on remote"""
+    pass
+
 ################################################################################
 # Utilities
 ################################################################################
@@ -59,11 +63,21 @@ def __fetchFile__(relativePath):
     """
     return requests.get("https://www-dev.archeogrid.fr/descaladen?type=E&idP=" + projectName() + "&path=" + relativePath, allow_redirects=True)
 
+def __queryFileAvailability__(relativePath):
+    """Ask remote if a given file is available for download
+    It is not recommended to call this function directly, prefer checkFileExistsOnRemote
+    :seealso: checkFileExistsOnRemote().
+    """
+    return requests.get("https://www-dev.archeogrid.fr/exists?type=E&idP=" + projectName() + "&path=" + relativePath, allow_redirects=True)
+
 
 ################################################################################
 # Getters
 ################################################################################
 def getLocalPath():
+    """
+    :raises: DatasetInitializationError
+    """
     __checkInitialized__()
     return __LOCAL_DATASET_PATH__
 
@@ -85,6 +99,14 @@ def getUnitRelativeDirectory(assetName, unitName):
 ################################################################################
 # Fetching and loading data
 ################################################################################
+def checkFileExistsOnRemote(relative):
+    """Check if a given fail is available for download"""
+    verboseLog ("Checking if file {} is available online...".format(relative))
+    c = bool(int(__queryFileAvailability__(relative).content))
+    if (c) : verboseLog ("File available")
+    return c
+
+
 def getSynchronizedFilePath(relativePath, forceSync = False):
     """Get the path on the current filesystem from a file in the dataset.
     If the file is not in the filesystem, it is downloaded first.
@@ -94,6 +116,7 @@ def getSynchronizedFilePath(relativePath, forceSync = False):
     directly.
 
     :seealso: getAssetMeta, getUnitMeta
+    :raises: DatasetInitializationError, RemoteFileNotFountError
     """
     __checkInitialized__()
 
@@ -102,6 +125,9 @@ def getSynchronizedFilePath(relativePath, forceSync = False):
 
     # check if file needs to be downloaded
     if not os.path.exists(localpath) or forceSync:
+
+        if not checkFileExistsOnRemote(relativePath):
+            raise RemoteFileNotFountError("File not available on remote: " + relativePath)
         # download file
         verboseLog ("Fetching " + relativePath + " from online dataset...")
         r = __fetchFile__(relativePath)
