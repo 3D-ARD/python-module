@@ -118,6 +118,13 @@ def getSynchronizedFilePath(relativePath, forceSync = False):
     # return read only file descriptor
     return localpath
 
+def getDatasetMeta(forceSync = False):
+    """Get the metadata of the current dataset. The metadata file is fetched if needed.
+    :seealso: getSynchronizedFilePath()
+    """
+    localpath = getSynchronizedFilePath( "asset.json", forceSync ) #will be renamed as assets.json
+    return json.load( open(localpath, 'r') )
+
 def getAssetMeta(assetName, forceSync = False):
     """Get the metadata of a given asset. The metadata file is fetched if needed.
     :seealso: getSynchronizedFilePath()
