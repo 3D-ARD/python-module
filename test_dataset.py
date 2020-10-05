@@ -1,14 +1,15 @@
+#!/usr/bin/env python
 from ThreeDARD import *
 
 assets = ["Maitreya_Buddha", "Dame_d_Elche", "Os", "Jonque", "Guitare_tatou", "Annexe_Haut_Carre",  "Great Tit Skull"]
 
 dataset.init("./dataset")
-dataset.verbose = False
+dataset.verbose = True
 
 forceSync = True
 
 d = dataset.getDatasetMeta(forceSync)
-assets = d["units"]
+assets = d["assets"]
 
 def test_forcingAssetsMeta():
     for a in assets:

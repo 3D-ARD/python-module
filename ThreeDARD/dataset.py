@@ -1,9 +1,22 @@
-# 3D-ARD dataset abstraction module
+#!/usr/bin/env python
+
+"""
+3D-ARD dataset python abstraction module
+
+Project website: https://3dard.cnrs.fr/
+Github repository: https://github.com/3D-ARD/python-module
+"""
 import requests
 import os
 import json
 
+"""Global (hidden) variable storing the location of the dataset locally. 
+Must be initialized prior any use, by calling the init function (do not set
+directly !). Once set, it cannot be modified.
+"""
 __LOCAL_DATASET_PATH__ = None
+
+"""Boolean state: activate verbose logging on stdout."""
 verbose = True
 
 class DatasetInitializationError(Exception):
@@ -48,6 +61,9 @@ def isInitialized():
 ################################################################################
 # Internals
 ################################################################################
+def __archeogridUrl__(): 
+    return "https://www-dev.archeogrid.fr/"
+
 def __checkInitialized__():
     """Check if the dataset has been correctly initialized
     :seealso: init().
@@ -61,14 +77,14 @@ def __fetchFile__(relativePath):
     It is not recommended to call this function directly, prefer getSynchronizedFilePath
     :seealso: getSynchronizedFilePath().
     """
-    return requests.get("https://www-dev.archeogrid.fr/descaladen?type=E&idP=" + projectName() + "&path=" + relativePath, allow_redirects=True)
+    return requests.get("{}descaladen?type=E&idP={}&path={}".format(__archeogridUrl__(), projectName(), relativePath), allow_redirects=True)
 
 def __queryFileAvailability__(relativePath):
     """Ask remote if a given file is available for download
     It is not recommended to call this function directly, prefer checkFileExistsOnRemote
     :seealso: checkFileExistsOnRemote().
     """
-    return requests.get("https://www-dev.archeogrid.fr/exists?type=E&idP=" + projectName() + "&path=" + relativePath, allow_redirects=True)
+    return requests.get("{}exists?type=E&idP={}&path={}".format(__archeogridUrl__(), projectName(), relativePath), allow_redirects=True)
 
 
 ################################################################################
@@ -148,7 +164,7 @@ def getDatasetMeta(forceSync = False):
     """Get the metadata of the current dataset. The metadata file is fetched if needed.
     :seealso: getSynchronizedFilePath()
     """
-    localpath = getSynchronizedFilePath( "asset.json", forceSync ) #will be renamed as assets.json
+    localpath = getSynchronizedFilePath( "assets.json", forceSync ) #will be renamed as assets.json
     return json.load( open(localpath, 'r') )
 
 def getAssetMeta(assetName, forceSync = False):
