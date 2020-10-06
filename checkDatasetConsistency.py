@@ -3,7 +3,7 @@
 """
 This file is part of the 3D-ARD dataset python abstraction module
 
-This example demonstrates how to browse the repository by downloading only the 
+This example demonstrates how to browse the repository by downloading only the
 metadata, and check that all files mentionned in metadata can be downloaded from
 the server.
 
@@ -59,9 +59,9 @@ for a in d["assets"]:
                 print ( "[" + u + "] " + unit["name"] + " (software = " + str(unit["software"]) + ").")
 
 
-#                # check file consistency
-#                for entry in unit["outputs"]:
-#                    filename = dataset.getUnitRelativeDirectory(a, u) + "/" + entry["filename"]
-#                    if not dataset.checkFileExistsOnRemote(filename):
-#                        printError("[{}] FileNotFound: {}".format(u, filename))
+                # check file consistency
+                for entry in unit["outputs"]:
+                    filename = dataset.getUnitRelativeDirectory(a, u) + "/" + entry["filename"]
+                    if not dataset.checkFileExistsOnRemote(filename):
+                        printError("[{}] FileNotFound: {}".format(u, filename))
 
