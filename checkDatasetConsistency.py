@@ -17,9 +17,8 @@ import colored, os
 dataset.init("./dataset")
 dataset.verbose = False
 
-forceSync = False
+forceSync = True
 printFileContent = True
-fetch3D = False
 
 def printError(message):
     print(colored.stylize(message, colored.fg("red")))
@@ -28,7 +27,12 @@ def printFile(filename):
     print(colored.stylize(open(filename, 'r').read() , colored.bg("light_red")))
 
 
-d = dataset.getDatasetMeta(forceSync)
+try:
+    d = dataset.getDatasetMeta(forceSync)
+except dataset.RemoteFileNotFountError:
+    printError("FileNotFound: dataset metadata not available on remote.")
+    quit()
+
 for a in d["assets"]:
     print ("\nProcessing asset " + a)
     asset = None
