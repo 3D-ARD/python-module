@@ -62,7 +62,7 @@ def isInitialized():
 # Internals
 ################################################################################
 def __archeogridUrl__(): 
-    return "https://www-dev.archeogrid.fr/"
+    return "https://www.archeogrid.fr/"
 
 def __checkInitialized__():
     """Check if the dataset has been correctly initialized
