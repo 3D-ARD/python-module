@@ -175,10 +175,16 @@ def getAssetMeta(assetName, forceSync = False):
     localpath = getSynchronizedFilePath( relativePath, forceSync )
     return json.load( open(localpath, 'r') )
 
-def getUnitMeta(assetName, unitName, forceSync = False):
-    """Get the metadata of a given unit. The metadata file is fetched if needed.
+def getUnitDataPath(assetName, unitName, fileName, forceSync = False):
+    """Get local path of file from a given unit. File is fetched if needed.
     :seealso: getSynchronizedFilePath()
     """
-    relativePath = os.path.join(getUnitRelativeDirectory(assetName, unitName), "unit.json")
-    localpath = getSynchronizedFilePath( relativePath, forceSync )
+    relativePath = os.path.join(getUnitRelativeDirectory(assetName, unitName), fileName)
+    return getSynchronizedFilePath( relativePath, forceSync )
+
+def getUnitMeta(assetName, unitName, forceSync = False):
+    """Get the metadata of a given unit. The metadata file is fetched if needed.
+    :seealso: getUnitDataPath(), getLocalFilename()
+    """
+    localpath = getUnitDataPath(assetName, unitName, "unit.json", forceSync)
     return json.load( open(localpath, 'r') )
