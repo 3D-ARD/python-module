@@ -27,7 +27,7 @@ Usage
 
 API usage is demonstrated by two scripts:
 
- - the Jupyter notebook ``demos/fetchDisplayAndProcess.ipynb``:
+ - the Jupyter notebook ``fetchDisplayAndProcess.ipynb``:
  
   - collect and display point clouds and meshes in Jupyter
   - process data using `Open3d <http://www.open3d.org>`_
