@@ -6,13 +6,32 @@ Python module to query an fetch the 3D-ARD project.
 - Dataset url: https://www.archeogrid.fr/project/6762
 - Current status: Python API ready for testing. Data can only be downloaded using python module.
 
+.. code-block:: bibtex
+
+    @misc{3dard_2019,
+      author = {Mellado, Nicolas and
+                Marcadet, Quentin and
+                Espinasse, Loic and
+                Mora, Pascal and
+                Dutailly, Bruno and
+                Tournon-Valiente, Sarah and
+                Granier, Xavier},
+      title = {{3D-ARD}: A 3D-Acquired Research Dataset},
+      month = {June},
+      year = {2020}
+    }
+
 
 Usage
 #####
-API usage is demonstrated by the script ``checkDatasetConsistency.py``: 
- - fetch metadata from server,
- - get file listing for all assets and units in the dataset, check files can be downloaded using the API,
- - print metadatas.
+API usage is demonstrated by two scripts:
+ * the Jupyter notebook ``demos/fetchDisplayAndProcess.ipynb``:
+   * collect and display point clouds and meshes in Jupyter
+   * process data using `Open3d <http://www.open3d.org>`_
+ *  ``checkDatasetConsistency.py``:
+   * fetch metadata from server,
+   * get file listing for all assets and units in the dataset, check files can be downloaded using the API,
+   * print metadatas.
 
 
 .. code-block:: bash
