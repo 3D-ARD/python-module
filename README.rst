@@ -8,7 +8,7 @@ Python module to query an fetch the 3D-ARD project.
 
 .. code-block:: bibtex
 
-    @misc{3dard_2019,
+    @misc{3dard_2020,
       author = {Mellado, Nicolas and
                 Marcadet, Quentin and
                 Espinasse, Loic and
@@ -24,14 +24,18 @@ Python module to query an fetch the 3D-ARD project.
 
 Usage
 #####
+
 API usage is demonstrated by two scripts:
- * the Jupyter notebook ``demos/fetchDisplayAndProcess.ipynb``:
-   * collect and display point clouds and meshes in Jupyter
-   * process data using `Open3d <http://www.open3d.org>`_
- *  ``checkDatasetConsistency.py``:
-   * fetch metadata from server,
-   * get file listing for all assets and units in the dataset, check files can be downloaded using the API,
-   * print metadatas.
+
+ - the Jupyter notebook ``demos/fetchDisplayAndProcess.ipynb``:
+ 
+  - collect and display point clouds and meshes in Jupyter
+  - process data using `Open3d <http://www.open3d.org>`_
+ -  ``checkDatasetConsistency.py``:
+ 
+  * fetch metadata from server,
+  * get file listing for all assets and units in the dataset, check files can be downloaded using the API,
+  * print metadatas.
 
 
 .. code-block:: bash
