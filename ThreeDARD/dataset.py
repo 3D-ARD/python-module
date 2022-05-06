@@ -137,7 +137,8 @@ def getSynchronizedFilePath(relativePath, forceSync = False):
     __checkInitialized__()
 
     global __LOCAL_DATASET_PATH__
-    localpath = os.path.join(__LOCAL_DATASET_PATH__, relativePath.replace(os.sep, "/"))
+    relativePath = relativePath.replace(os.sep, "/")
+    localpath    = os.path.join(__LOCAL_DATASET_PATH__, relativePath.replace(os.sep, "/"))
 
     # check if file needs to be downloaded
     if not os.path.exists(localpath) or forceSync:
