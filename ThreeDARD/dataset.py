@@ -118,7 +118,7 @@ def getUnitRelativeDirectory(assetName, unitName):
 def checkFileExistsOnRemote(relative):
     """Check if a given fail is available for download"""
     verboseLog ("Checking if file {} is available online...".format(relative))
-    c = bool(int(__queryFileAvailability__(relative).content))
+    c = (__queryFileAvailability__(relative).content == b'true')
     if (c) : verboseLog ("File available")
     return c
 
